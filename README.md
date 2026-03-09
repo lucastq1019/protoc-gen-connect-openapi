@@ -235,3 +235,9 @@ go test ./...
 # or, if you prefer:
 just test
 ```
+
+```shell
+
+# build in your space
+go build -o $(go env GOPATH)/bin/protoc-gen-connect-openapi .
+```

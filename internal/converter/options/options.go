@@ -67,6 +67,8 @@ type Options struct {
 	ShortServiceTags bool
 	// ShortOperationIds sets the operationId to shortServiceName + "_" + method short name instead of the full method name.
 	ShortOperationIds bool
+	// NoSchemaTitle disables the title field for message schemas.
+	NoSchemaTitle bool
 	// WithGoogleErrorDetail will add google error detail to the connect error response.
 	WithGoogleErrorDetail bool
 	// DisableDefaultResponse disables the default 200 response.
@@ -178,6 +180,8 @@ func FromString(s string) (Options, error) {
 			opts.ShortServiceTags = true
 		case param == "short-operation-ids":
 			opts.ShortOperationIds = true
+		case param == "no-schema-title":
+			opts.NoSchemaTitle = true
 		case param == "with-google-error-detail":
 			opts.WithGoogleErrorDetail = true
 		case param == "disable-default-response":

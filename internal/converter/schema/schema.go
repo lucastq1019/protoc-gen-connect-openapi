@@ -32,6 +32,9 @@ func MessageToSchema(opts options.Options, tt protoreflect.MessageDescriptor) (s
 	if opts.FullyQualifiedMessageNames {
 		title = string(tt.FullName())
 	}
+	if opts.NoSchemaTitle {
+		title = ""
+	}
 	s := &base.Schema{
 		Title:                title,
 		Description:          util.FormatComments(tt.ParentFile().SourceLocations().ByDescriptor(tt)),
@@ -147,6 +150,9 @@ func FieldToSchema(opts options.Options, parent *base.SchemaProxy, tt protorefle
 		switch tt.Kind() {
 		case protoreflect.MessageKind, protoreflect.EnumKind:
 			msg := ScalarFieldToSchema(opts, parent, tt, false)
+			if opts.NoSchemaTitle {
+				msg.Title = ""
+			}
 			ref := ReferenceFieldToSchema(opts, parent, tt)
 			if tt.HasOptionalKeyword() {
 				msg.OneOf = []*base.SchemaProxy{
